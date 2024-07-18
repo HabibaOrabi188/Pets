@@ -8,6 +8,7 @@ body {
   background-image: url(http://pets-images.dev-apis.com/pets/wallpaperB.jpg);
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding:40px;
 }
 
 .search-params {
