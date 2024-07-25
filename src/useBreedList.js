@@ -1,9 +1,26 @@
-import { useEffect, useState } from "react";
+// import { useQuery } from "@tanstack/react-query";
+// import { useEffect, useState } from "react";
+// import fetchBreedList from "./fetchBreedList";
+import { useGetBreedsQuery, useGetPetQuery } from "./PetApiService";
 
-const localCache={}
+
 
 export default function useBreedList(animal){
-    const [breedList,setbreedList]=useState([])
+
+    // const result=useQuery(["breeds",animal],fetchBreedList)
+
+    const {data:breeds}=useGetBreedsQuery(animal,{skip:!animal})
+    // return [result?.data?.breeds ??[]]
+
+    return [breeds??[]]
+    
+}
+
+
+
+/*
+
+const [breedList,setbreedList]=useState([])
 
     const [isLoading,setLoading]=useState(false)
 
@@ -50,4 +67,6 @@ export default function useBreedList(animal){
        }
     }
     return [breedList,isLoading,error]
-}
+
+
+*/

@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import React, { StrictMode, useState } from 'react';
 
 import {createRoot} from 'react-dom/client';
 
@@ -7,6 +7,24 @@ import Search from './Search';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Details from './Details';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AdoptedPetContext from './AdoptedPetContext';
+import { Provider } from 'react-redux';
+
+import Store from './Store';
+
+
+const queryClient=new QueryClient({
+  defaultOptions:{
+    queries:{
+      staleTime:Infinity,
+      cacheTime:Infinity
+
+    }
+  }
+  
+})
+
+
 const App = ()=>{
   //   return React.createElement('div', {}, [
   //     React.createElement('h2', null, 'myProject'),
@@ -16,43 +34,41 @@ const App = ()=>{
   //   ]);
 
 
+  const adoptedPet=useState(null)
 
-  const queryClient=new QueryClient({
-    defaultOptions:{
-      queries:{
-        staleTime:Infinity,
-        cacheTime:Infinity,
 
-      }
-    }
-    
-  })
+
+  
 
   return (
 
     <BrowserRouter>
 
+    <Provider store={Store}>
     <QueryClientProvider client={queryClient}>
+  
+  <header>
+  <Link to="/">Adopt Me!</Link>
+  </header>
 
+  {/* <AdoptedPetContext.Provider value={adoptedPet}> */}
 
-    
-    <header>
-    <Link to="/">Adopt Me!</Link>
-    </header>
+ 
 
-      {/* <Search /> */}
+    {/* <Search /> */}
 
-      {/* <Pet name='Jax' animal='Dog' breed='G. Sh.'/>
-      <Pet name='SO' animal='cat' breed='Siemese'/>
-      <Pet name='Zayn' animal='Bird' breed='Cockatiel'/> */}
+    {/* <Pet name='Jax' animal='Dog' breed='G. Sh.'/>
+    <Pet name='SO' animal='cat' breed='Siemese'/>
+    <Pet name='Zayn' animal='Bird' breed='Cockatiel'/> */}
 
-      <Routes>
-        <Route path="/details/:id" element={<Details/>} />
-        <Route path="/" element={<Search/>} />
-      </Routes>
+    <Routes>
+      <Route path="/details/:id" element={<Details/>} />
+      <Route path="/" element={<Search/>} />
+    </Routes>
 
-           
-    </QueryClientProvider>
+    {/* </AdoptedPetContext.Provider> */}
+  </QueryClientProvider>
+    </Provider>
 
     </BrowserRouter>
     

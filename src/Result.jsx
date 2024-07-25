@@ -1,4 +1,4 @@
-
+import React from 'react'
 import {Pet} from  './Pet'
 
 export default function Result({pets}){
@@ -15,6 +15,7 @@ export default function Result({pets}){
         animal={item.animal}
         breed={item.breed}
         id={item.id}
+        location={`${item.city},${item.state}`}
         images={item.images}
 
         />
